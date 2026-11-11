@@ -19,7 +19,7 @@ document.getElementById("backToLoginFromAccountMgmt").addEventListener("click", 
 });
 document.getElementById("deleteAccountButton").addEventListener("click", async function () {
   var username = document.getElementById("deleteUsernameInput").value;
-  if (username === "") {
+  if (username == "") {
     alert("Enter a username.");
     return;
   }
@@ -49,11 +49,11 @@ document.getElementById("backButton2").addEventListener("click", function () {
 async function login() {
   var userU = document.getElementById("nameInput").value;
   var userP = document.getElementById("passwordInput").value;
-  if (userU.length === 0) {
+  if (userU.length == 0) {
     document.getElementById("nameInput").placeholder = "Enter a name!";
     return;
   }
-  if (userP.length === 0) {
+  if (userP.length == 0) {
     document.getElementById("passwordInput").placeholder = "Enter a Password!";
     return;
   }
@@ -74,14 +74,14 @@ async function login() {
       })
     });
     const result = await response.text();
-    if (result === "LOGIN_SUCCESS" || result === "ACCOUNT_CREATED") {
+    if (result == "LOGIN_SUCCESS" || result == "ACCOUNT_CREATED") {
       document.getElementById("nameInput").value = "";
       document.getElementById("passwordInput").value = "";
       showScreen("testScreen");
-    } else if (result === "WRONG_PASSWORD") {
+    } else if (result == "WRONG_PASSWORD") {
       document.getElementById("passwordInput").value = "";
       document.getElementById("passwordInput").placeholder = "Wrong Password!";
-    } else if (result === "PASSWORD_TOO_SHORT") {
+    } else if (result == "PASSWORD_TOO_SHORT") {
       document.getElementById("passwordInput").value = "";
       document.getElementById("passwordInput").placeholder = "8 Characters Minimum!";
     }
@@ -120,29 +120,29 @@ function recipe() {
     document.getElementById("recipeImage");
   var recipeName =
     document.getElementById("recipeName");
-  if (experience === "Select" || type === "Select") {
+  if (experience == "Select" || type == "Select") {
     showScreen("testScreen");
     return;
   }
-  if (experience === "Novice") {
-    if (type === "Sweet") {
+  if (experience == "Novice") {
+    if (type == "Sweet") {
       recommendationArea.textContent = "URL:\n\nhttps://www.kingarthurbaking.com/recipes/gingerbread-recipe";
       recipeImage.src =     "https://www.kingarthurbaking.com/sites/default/files/styles/lg_1x_1360px/public/recipe_legacy/7-3-large.jpg?itok=CoLEXYWd";
       recipeName.textContent = "Gingerbread";
     }
-    if (type === "Savory") {
+    if (type == "Savory") {
       recommendationArea.textContent =
 "URL:\n\nhttps://www.kingarthurbaking.com/recipes/caraway-rye-bread-recipe";
       recipeImage.src =   "https://www.kingarthurbaking.com/sites/default/files/styles/lg_1x_1360px/public/2025-05/Caraway-Rye-Bread.jpg?itok=rfIbNC5v";
       recipeName.textContent = "Caraway Rye Bread";
     }
-    if (type === "Spicy") {
+    if (type == "Spicy") {
       recommendationArea.textContent =
         "URL:\n\nhttps://theprofessionalchef.com/zesty-spicy-swordfish";
       recipeImage.src = "https://ww2.kqed.org/app/uploads/sites/56/2011/09/swordfish560.jpg";
       recipeName.textContent = "Zesty Spicy Swordfish";
     }
-    if (type === "Sour") {
+    if (type == "Sour") {
       recommendationArea.textContent =
         "URL:\n\nhttps://www.dianekochilas.com/easy-greek-lemon-garlic-olive-oil-pasta/";
       recipeImage.src =
@@ -151,26 +151,26 @@ function recipe() {
         "Greek Lemon Garlic Olive Oil Pasta";
     }
   }
-  if (experience === "Intermediate") {
-    if (type === "Sweet") {
+  if (experience == "Intermediate") {
+    if (type == "Sweet") {
       recommendationArea.textContent = "URL:\n\nhttps://www.kingarthurbaking.com/recipes/king-arthurs-carrot-cake-recipe";
       recipeImage.src = "https://www.kingarthurbaking.com/sites/default/files/styles/lg_1x_1360px/public/2025-04/King-Arthurs-Carrot-Cake-2.jpg?itok=cUWABAgs";
       recipeName.textContent = "Carrot Cake";
     }
-    if (type === "Savory") {
+    if (type == "Savory") {
       recommendationArea.textContent =
 "URL:\n\nhttps://www.kingarthurbaking.com/recipes/homemade-cheese-ravioli-recipe";
       recipeImage.src =       "https://www.kingarthurbaking.com/sites/default/files/styles/lg_1x_1360px/public/2023-06/Ravioli_1382.jpg?itok=Esl5GrHs";
       recipeName.textContent = "Cheese Ravioli";
     }
-    if (type === "Spicy") {
+    if (type == "Spicy") {
       recommendationArea.textContent =
         "URL:\n\nhttps://theprofessionalchef.com/spicy-cauliflower-soup";
       recipeImage.src =
         "https://savoryspin.com/wp-content/uploads/2022/01/Two-bowls-with-spicy-cauliflower-soup-vegan-gluten-free-1169x1536.jpg";
       recipeName.textContent = "Spicy Cauliflower Soup";
     }
-    if (type === "Sour") {
+    if (type == "Sour") {
       recommendationArea.textContent =
         "URL:\n\nhttps://www.dianekochilas.com/crispy-cauliflower-pasta-with-feta-lemon-garlicky-breadcrumbs/";
       recipeImage.src =
@@ -178,19 +178,19 @@ function recipe() {
       recipeName.textContent = "Crispy Cauliflower Pasta";
     }
   }
-  if (experience === "Advanced") {
-    if (type === "Sweet") {
+  if (experience == "Advanced") {
+    if (type == "Sweet") {
       recommendationArea.textContent =  "URL:\n\nhttps://www.kingarthurbaking.com/recipes/chocolate-mousse-cake-with-raspberries-recipe";
       recipeImage.src =     "https://www.kingarthurbaking.com/sites/default/files/styles/lg_1x_1360px/public/2021-03/chocolate-mousse-cake-with-raspberries.jpg?itok=GvEfZzOx";
       recipeName.textContent = "Chocolate Mousse Cake";
     }
-    if (type === "Savory") {
+    if (type == "Savory") {
       recommendationArea.textContent =  "URL:\n\nhttps://www.kingarthurbaking.com/recipes/homemade-pasta-with-herb-butter-recipe";
       recipeImage.src =
 "https://www.kingarthurbaking.com/sites/default/files/styles/lg_1x_1360px/public/2025-07/Homemade-Pasta-w-Herb-Butter_Fall-Direct-Shoot_2025_Shot-5_009.jpg?itok=U4iqBzcO";
       recipeName.textContent = "Pasta with Herb Butter";
     }
-    if (type === "Spicy") {
+    if (type == "Spicy") {
       recommendationArea.textContent =
         "URL:\n\nhttps://theprofessionalchef.com/beer-battered-habanero-buffalo-wings";
       recipeImage.src =
@@ -198,7 +198,7 @@ function recipe() {
       recipeName.textContent =
         "Beer-battered Habanero Buffalo Wings";
     }
-    if (type === "Sour") {
+    if (type == "Sour") {
       recommendationArea.textContent =
         "URL:\n\nhttps://www.dianekochilas.com/octopus-with-orange-and-olives/";
       recipeImage.src =
@@ -207,22 +207,22 @@ function recipe() {
         "Octopus with Orange and Olives";
     }
   }
-  if (experience === "Expert") {
-    if (type === "Sweet") {
+  if (experience == "Expert") {
+    if (type == "Sweet") {
       recommendationArea.textContent =
 "URL:\n\nhttps://www.kingarthurbaking.com/recipes/princess-cake-prinsesstarta-recipe";
       recipeImage.src =     "https://www.kingarthurbaking.com/sites/default/files/styles/lg_1x_1360px/public/2023-08/Princess-Cake_0493.jpg?itok=2GjKENYL";
       recipeName.textContent =
         "Princess Cake Princesstarta";
     }
-    if (type === "Savory") {
+    if (type == "Savory") {
       recommendationArea.textContent =
 "URL:\n\nhttps://www.kingarthurbaking.com/recipes/pain-de-campagne-country-bread-recipe";
       recipeImage.src =   "https://www.kingarthurbaking.com/sites/default/files/styles/lg_1x_1360px/public/2023-03/Pain-De-Campagne_0961.jpg?itok=bOVhcO20";
       recipeName.textContent =
         "Pain de Campagne";
     }
-    if (type === "Spicy") {
+    if (type == "Spicy") {
       recommendationArea.textContent =
         "URL:\n\nhttps://omnivorescookbook.com/cumin-beef/";
       recipeImage.src =
@@ -230,7 +230,7 @@ function recipe() {
       recipeName.textContent =
         "Cumin Beef";
     }
-    if (type === "Sour") {
+    if (type == "Sour") {
       recommendationArea.textContent =
         "URL:\n\nhttps://www.dianekochilas.com/green-risotto-with-shrimp-caramelized-tomatoes-and-yogurt-cheese/";
       recipeImage.src =
