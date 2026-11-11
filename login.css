@@ -1,0 +1,45 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(to bottom, #000000, #000000, #00ffff);
+}
+.screen {
+  padding: 20px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, #000000, #000000, #00ffff);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+}
+h1 {
+  text-align: center;
+  color: #ffffff;
+}
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 6px;
+  box-sizing: border-box; 
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  color: #8a0000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #000000;
+}
+#forgotAccountButton {
+  margin-top: 2rem;
+}

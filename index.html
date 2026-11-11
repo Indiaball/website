@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="select.css">
+  <link rel="stylesheet" href="recipe.css">
+</head>
+<body>
+  <div id="loginScreen" class="screen">
+    <h1>Hello</h1>
+    <input type="text" id="nameInput" placeholder="Username">
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button id="loginButton">Login</button>
+    <button id="manageAccountsButton">Manage Accounts</button>
+  </div>
+  <div id="accountManagementScreen" class="screen">
+    <h1>Account Management</h1>
+    <input type="text" id="deleteUsernameInput" placeholder="Username">
+    <button id="deleteAccountButton">Delete Account</button>
+    <button id="clearAccountsButton">Clear All Accounts</button>
+    <button id="backToLoginFromAccountMgmt">Back to Login</button>
+  </div>
+  <div id="testScreen" class="screen">
+    <h1>Select</h1>
+    <select id="experienceDropdown">
+      <option value="Select">Select Experience</option>
+      <option value="Novice">Novice</option>
+      <option value="Intermediate">Intermediate</option>
+      <option value="Advanced">Advanced</option>
+      <option value="Expert">Expert</option>
+    </select>
+
+    <select id="typeDropdown">
+      <option value="Select">Select Type</option>
+      <option value="Sweet">Sweet</option>
+      <option value="Savory">Savory</option>
+      <option value="Spicy">Spicy</option>
+      <option value="Sour">Sour</option>
+    </select>
+    <button id="recipe">Get Recipe</button>
+    <button id="backButton">Back to Login</button>
+  </div>
+  <div id="recommendationsScreen" class="screen">
+    <h1>Here is the recipe we recommend for you!</h1>
+    <h2 id="recipeName"></h2>
+    <img
+      id="recipeImage"
+      src="https://studio.code.org/lab_resources/html-placeholder-image.avif"
+      alt="Recipe Image"
+      width="300"
+      height="200">
+    <p id="recommendationArea"></p>
+    <button id="backButton2">Back to Selection</button>
+  </div>
+  <script src="frontend.js"></script>
+</body>
+</html>
