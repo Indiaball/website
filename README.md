@@ -1,2 +1,3 @@
 # website
-what do i add here? fuck you, nothing.
+My website I am making. Why? I do not know, but I feel forced to complete it.
+Location: Basement
