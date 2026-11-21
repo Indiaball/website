@@ -1,99 +1,114 @@
 /*Code written by Kashyap I.*/
-var type;
-var experience;
-var acc = 0;
+const API_BASE_URL = "https://github.dev";
+let type: string = "";
+let experience: string = "";
+let acc: number = 0;
 showScreen("loginScreen");
-function showScreen(screenId) {
-  var screens = document.getElementsByClassName("screen");
-  for (var i = 0; i < screens.length; i++) {
+function showScreen(screenId: string): void {
+  const screens = document.getElementsByClassName("screen") as HTMLCollectionOf<HTMLElement>;
+  for (let i = 0; i < screens.length; i++) {
     screens[i].style.display = "none";
   }
-  document.getElementById(screenId).style.display = "block";
+  const targetScreen = document.getElementById(screenId);
+  if (targetScreen) {
+    targetScreen.style.display = "block";
+  }
 }
-document.getElementById("loginButton").addEventListener("click", login);
-document.getElementById("manageAccountsButton").addEventListener("click", function () {
+document.getElementById("loginButton")?.addEventListener("click", login);
+document.getElementById("manageAccountsButton")?.addEventListener("click", () => {
   showScreen("accountManagementScreen");
 });
-document.getElementById("backToLoginFromAccountMgmt").addEventListener("click", function () {
+document.getElementById("backToLoginFromAccountMgmt")?.addEventListener("click", () => {
   showScreen("loginScreen");
 });
-document.getElementById("deleteAccountButton").addEventListener("click", async function () {
-  var username = document.getElementById("deleteUsernameInput").value;
-  if (username == "") {
+document.getElementById("deleteAccountButton")?.addEventListener("click", async () => {
+  const deleteInput = document.getElementById("deleteUsernameInput") as HTMLInputElement | null;
+  if (!deleteInput) return;
+  const username = deleteInput.value;
+  if (username === "") {
     alert("Enter a username.");
     return;
   }
   await deleteAccount(username);
-  document.getElementById("deleteUsernameInput").value = "";
+  deleteInput.value = "";
   alert("Account deleted if it exists.");
 });
-document.getElementById("clearAccountsButton").addEventListener("click", async function () {
+document.getElementById("clearAccountsButton")?.addEventListener("click", async () => {
   await clearAccounts();
   alert("All accounts have been deleted.");
 });
-document.getElementById("recipe").addEventListener("click", function () {
+document.getElementById("recipe")?.addEventListener("click", () => {
   showScreen("recommendationsScreen");
   recipe();
 });
-document.getElementById("backButton").addEventListener("click", function () {
+document.getElementById("backButton")?.addEventListener("click", () => {
   showScreen("loginScreen");
-  document.getElementById("nameInput").value = "";
-  document.getElementById("passwordInput").value = "";
-  document.getElementById("passwordInput").placeholder = "Password";
+  const nameInput = document.getElementById("nameInput") as HTMLInputElement | null;
+  const passwordInput = document.getElementById("passwordInput") as HTMLInputElement | null;
+  if (nameInput) nameInput.value = "";
+  if (passwordInput) {
+    passwordInput.value = "";
+    passwordInput.placeholder = "Password";
+  }
 });
-document.getElementById("backButton2").addEventListener("click", function () {
+document.getElementById("backButton2")?.addEventListener("click", () => {
   showScreen("testScreen");
-  document.getElementById("experienceDropdown").value = "Select";
-  document.getElementById("typeDropdown").value = "Select";
+  const experienceDropdown = document.getElementById("experienceDropdown") as HTMLSelectElement | null;
+  const typeDropdown = document.getElementById("typeDropdown") as HTMLSelectElement | null;
+  if (experienceDropdown) experienceDropdown.value = "Select";
+  if (typeDropdown) typeDropdown.value = "Select";
 });
-async function login() {
-  var userU = document.getElementById("nameInput").value;
-  var userP = document.getElementById("passwordInput").value;
-  if (userU.length == 0) {
-    document.getElementById("nameInput").placeholder = "Enter a name!";
+async function login(): Promise<void> {
+  const nameInput = document.getElementById("nameInput") as HTMLInputElement | null;
+  const passwordInput = document.getElementById("passwordInput") as HTMLInputElement | null;
+  if (!nameInput || !passwordInput) return;
+  const userU = nameInput.value;
+  const userP = passwordInput.value;
+  if (userU.length === 0) {
+    nameInput.placeholder = "Enter a name!";
     return;
   }
-  if (userP.length == 0) {
-    document.getElementById("passwordInput").placeholder = "Enter a Password!";
+  if (userP.length === 0) {
+    passwordInput.placeholder = "Enter a Password!";
     return;
   }
   if (userP.length < 8) {
-    document.getElementById("passwordInput").value = "";
-    document.getElementById("passwordInput").placeholder = "8 Characters Minimum!";
+    passwordInput.value = "";
+    passwordInput.placeholder = "8 Characters Minimum!";
     return;
   }
   try {
-    const response = await fetch("https://studious-palm-tree-g4pw95gqw7wp2wxjq-8080.app.github.dev/api/auth/login", {
+    const response = await fetch(`${API_BASE_URL}/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username: userU,
-        password: userP
-      })
+        password: userP,
+      }),
     });
     const result = await response.text();
-    if (result == "LOGIN_SUCCESS" || result == "ACCOUNT_CREATED") {
-      document.getElementById("nameInput").value = "";
-      document.getElementById("passwordInput").value = "";
+    if (result === "LOGIN_SUCCESS" || result === "ACCOUNT_CREATED") {
+      nameInput.value = "";
+      passwordInput.value = "";
       showScreen("testScreen");
-    } else if (result == "WRONG_PASSWORD") {
-      document.getElementById("passwordInput").value = "";
-      document.getElementById("passwordInput").placeholder = "Wrong Password!";
-    } else if (result == "PASSWORD_TOO_SHORT") {
-      document.getElementById("passwordInput").value = "";
-      document.getElementById("passwordInput").placeholder = "8 Characters Minimum!";
+    } else if (result === "WRONG_PASSWORD") {
+      passwordInput.value = "";
+      passwordInput.placeholder = "Wrong Password!";
+    } else if (result === "PASSWORD_TOO_SHORT") {
+      passwordInput.value = "";
+      passwordInput.placeholder = "8 Characters Minimum!";
     }
   } catch (error) {
     console.error(error);
     alert("Unable to connect to backend server.");
   }
 }
-async function clearAccounts() {
+async function clearAccounts(): Promise<void> {
   try {
-    await fetch("http://localhost:8080/api/auth/all", {
-      method: "DELETE"
+    await fetch(`${API_BASE_URL}/all`, {
+      method: "DELETE",
     });
     acc = 0;
   } catch (error) {
@@ -101,25 +116,31 @@ async function clearAccounts() {
     alert("Failed to clear accounts.");
   }
 }
-async function deleteAccount(username) {
+async function deleteAccount(username: string): Promise<void> {
   try {
-    await fetch(`http://localhost:8080/api/auth/${encodeURIComponent(username)}`, {
-      method: "DELETE"
+    await fetch(`${API_BASE_URL}/${encodeURIComponent(username)}`, {
+      method: "DELETE",
     });
   } catch (error) {
     console.error(error);
     alert("Failed to delete account.");
   }
 }
-function recipe() {
-  experience = document.getElementById("experienceDropdown").value;
-  type = document.getElementById("typeDropdown").value;
-  var recommendationArea =
-    document.getElementById("recommendationArea");
-  var recipeImage =
-    document.getElementById("recipeImage");
-  var recipeName =
-    document.getElementById("recipeName");
+function recipe(): void {
+  const experienceDropdown = document.getElementById("experienceDropdown") as HTMLSelectElement | null;
+  const typeDropdown = document.getElementById("typeDropdown") as HTMLSelectElement | null;
+  const recommendationArea = document.getElementById("recommendationArea");
+  const recipeImage = document.getElementById("recipeImage") as HTMLImageElement | null;
+  const recipeName = document.getElementById("recipeName");
+  if (!experienceDropdown || !typeDropdown || !recommendationArea || !recipeImage || !recipeName) {
+    return;
+  }
+  experience = experienceDropdown.value;
+  type = typeDropdown.value;
+  if (experience === "Select" || type === "Select") {
+    showScreen("testScreen");
+    return;
+  }
   if (experience == "Select" || type == "Select") {
     showScreen("testScreen");
     return;
